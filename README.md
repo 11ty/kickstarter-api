@@ -18,7 +18,7 @@ Scheduled GitHub Actions scraper that publishes Kickstarter campaign stats as a 
 
 - Create a new GitHub repo named `kickstarter-api`
 - Go to **Settings → Pages**
-- Set source to **Deploy from a branch**, branch `gh-pages`, folder `/docs (root)`
+- Set source to **Deploy from a branch**, branch `gh-pages`, folder `/docs`
 
 ### Consuming the endpoint in Eleventy
 
