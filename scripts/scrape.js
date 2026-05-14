@@ -56,7 +56,7 @@ async function scrape() {
       updatedAt: new Date().toISOString(),
     };
 
-    writeFileSync("output/build-awesome-pro.json", JSON.stringify(stats, null, 2));
+    writeFileSync("docs/build-awesome-pro.json", JSON.stringify(stats, null, 2));
     console.log("Scraped:", stats);
   } finally {
     await browser.close();
