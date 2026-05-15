@@ -1,8 +1,8 @@
 import puppeteer from "puppeteer";
-import { writeFileSync } from "fs";
+import { writeFileSync, readFileSync } from "fs";
 
-const CAMPAIGN_URL =
-  "https://www.kickstarter.com/projects/fontawesome/build-awesome-pro";
+const CAMPAIGN_URL = "https://www.kickstarter.com/projects/fontawesome/build-awesome-pro";
+const TARGET_PATH = "docs/build-awesome-pro.json";
 
 async function scrape() {
   const url = new URL(CAMPAIGN_URL);
@@ -53,10 +53,24 @@ async function scrape() {
       currency: "USD",
       goal,
       percentFunded: Math.round(percentFunded),
-      updatedAt: new Date().toISOString(),
     };
 
-    writeFileSync("docs/build-awesome-pro.json", JSON.stringify(stats, null, 2));
+    let previous = JSON.parse(readFileSync(TARGET_PATH, "utf8"));
+    let changed = false;
+    for(let key in stats) {
+      if(stats[key] !== previous[key]) {
+        changed = true;
+      }
+    }
+
+    if(!changed) {
+      console.log("No changes detected, skipping write.");
+      return;
+    }
+
+    stats.updatedAt = new Date().toISOString();
+
+    writeFileSync(TARGET_PATH, JSON.stringify(stats, null, 2));
     console.log("Scraped:", stats);
   } finally {
     await browser.close();
