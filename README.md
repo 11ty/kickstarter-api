@@ -4,7 +4,7 @@ Scheduled GitHub Actions scraper that publishes Kickstarter campaign stats as a 
 
 ## How it works
 
-1. A GitHub Actions cron job runs every hour on the `gh-pages` branch
+1. A GitHub Actions cron job runs at a regular frequency determined by the YAML configuration file on the `gh-pages` branch
 2. Puppeteer scrapes `?format=json` from the Kickstarter campaign page
 3. Stats are written to `build-awesome-pro.json` and committed back to `gh-pages`
 4. GitHub Pages serves the file at:
