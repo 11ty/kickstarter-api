@@ -67,6 +67,11 @@ async function scrape() {
       console.log("No changes detected, skipping write.");
       return;
     }
+    
+    if(backers == 0 || pledged == 0 || goal == 0) {
+      console.log("Upstream fetch failed.");
+      return;
+    }
 
     stats.updatedAt = new Date().toISOString();
 
